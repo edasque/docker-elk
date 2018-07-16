@@ -6,7 +6,7 @@ services:
     build:
       context: elasticsearch/
     volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - /volume1/docker/ELK/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -19,10 +19,10 @@ services:
     build:
       context: logstash/
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - /volume1/docker/ELK/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - /volume1/docker/ELK/logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
-      - "5000:5000"
+      - "5500:5000"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -34,7 +34,7 @@ services:
     build:
       context: kibana/
     volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
+      - /volume1/docker/ELK/kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
